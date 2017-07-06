@@ -10,7 +10,10 @@ $path = 'http://www.nhaccuatui.com/flash/xml?html5=true&key2=b172bffc52996df16de
 // $path = 'http://www.nhaccuatui.com/flash/xml?html5=true&key2=e2806067ddd6ae211f3021c2d53b513f';
 // $path = 'http://www.nhaccuatui.com/flash/xml?html5=true&key2=a976ec5c2791fd39e378a1c3ac0dfa50';
 // $path = 'http://www.nhaccuatui.com/flash/xml?html5=true&key2=37c2174c11af1cfcf9fda5e553d5baa1';
-$folder = 'nhac';
+$folder = 'music';
+if( ! file_exists($folder) ) {
+   mkdir($folder, 0777, true);
+}
 $myXMLData = file_get_contents($path);
 
 $nodes = simplexml_load_string($myXMLData);
@@ -22,9 +25,7 @@ if ($nodes === false) {
 }
 else {
     $tracks = $nodes->track;
-    if( ! file_exists($folder) ) {
-        mkdir($folder);
-    }
+    
     foreach ($tracks as $key => $node) {
         $link =  $node->location;
         //var_dump($node);die();
